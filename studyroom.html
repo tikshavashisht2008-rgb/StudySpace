@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Room | StudySpace</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="studyroom-page">
+
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="logo">StudySpace.</a>
+            
+                <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="tasks.html">My Tasks</a>
+    <a href="studyroom.html">Study Room</a>
+    <a href="resources.html">Resources</a>
+</div>
+        
+        </nav>
+    </header>
+
+    
+<main class="page-container">
+
+    <section class="page-heading">
+        <p class="small-heading">TIME TO FOCUS</p>
+        <h1>Welcome to your Study Room</h1>
+        <p>Take a breath, put distractions aside and begin.</p>
+    </section>
+
+    <section class="study-layout">
+
+        <div class="study-box">
+
+            <h2>Focus Timer</h2>
+
+            <div class="timer-modes">
+                <button onclick="setMode('focus')">Focus</button>
+                <button onclick="setMode('short')">Short Break</button>
+                <button onclick="setMode('long')">Long Break</button>
+            </div>
+
+            <p class="timer" id="timer">25:00</p>
+
+            <p id="modeMessage">One focused session at a time.</p>
+
+            <div class="timer-buttons">
+                <button onclick="startTimer()">Start</button>
+                <button onclick="pauseTimer()">Pause</button>
+                <button onclick="resetTimer()">Reset</button>
+            </div>
+
+        </div>
+
+        <div class="study-box">
+
+            <h2>Quick Notes</h2>
+
+            <p>Write down your thoughts and ideas.</p>
+
+            <textarea id="notes"
+                placeholder="Start writing your notes here..."></textarea>
+
+            <button onclick="saveNotes()">Save Notes</button>
+
+            <p id="saveMessage"></p>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+
+    <footer>
+        <p>StudySpace. Made with love for every student.</p>
+    </footer>
+
+    <script>
+
+const modes = {
+    focus: 25 * 60,
+    short: 5 * 60,
+    long: 15 * 60
+};
+
+let currentMode = "focus";
+let timeLeft = modes.focus;
+let timerInterval = null;
+
+function updateTimer() {
+
+    let minutes = Math.floor(timeLeft / 60);
+    let seconds = timeLeft % 60;
+
+    document.getElementById("timer").textContent =
+        String(minutes).padStart(2, "0") + ":" +
+        String(seconds).padStart(2, "0");
+}
+
+function setMode(mode) {
+
+    pauseTimer();
+
+    currentMode = mode;
+    timeLeft = modes[mode];
+
+    const messages = {
+        focus: "One focused session at a time.",
+        short: "Take a little breather!",
+        long: "Relax and recharge."
+    };
+
+    document.getElementById("modeMessage").textContent =
+        messages[mode];
+
+    updateTimer();
+}
+
+function startTimer() {
+
+    if (timerInterval !== null) return;
+
+    timerInterval = setInterval(function() {
+
+        if (timeLeft > 0) {
+
+            timeLeft--;
+            updateTimer();
+
+        } else {
+
+            pauseTimer();
+            alert("Your session is complete!");
+
+        }
+
+    }, 1000);
+}
+
+function pauseTimer() {
+
+    clearInterval(timerInterval);
+    timerInterval = null;
+}
+
+function resetTimer() {
+
+    pauseTimer();
+    timeLeft = modes[currentMode];
+    updateTimer();
+}
+
+
+        function saveNotes() {
+
+            let notes = document.getElementById("notes").value;
+
+            localStorage.setItem("studyNotes", notes);
+
+            document.getElementById("saveMessage").textContent =
+                "Your notes have been saved!";
+
+        }
+
+        // Load previously saved notes
+
+        document.getElementById("notes").value =
+            localStorage.getItem("studyNotes") || "";
+
+    </script>
+
+</body>
+</html>
+

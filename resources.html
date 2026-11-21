@@ -1,0 +1,167 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources | StudySpace</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="resources-page">
+
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="logo">StudySpace.</a>
+
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="tasks.html">My Tasks</a>
+                <a href="studyroom.html">Study Room</a>
+                <a href="resources.html">Resources</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="page-container">
+
+        <section class="page-heading">
+            <p class="small-heading">LEARN SOMETHING NEW</p>
+            <h1>Your Learning Corner</h1>
+            <p>A collection of helpful places to learn, explore and grow.</p>
+        </section>
+
+        <section class="resource-search">
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search for a learning resource..."
+            >
+        </section>
+
+        <section class="resource-filters">
+
+            <button class="resource-filter active" data-category="all">All</button>
+            <button class="resource-filter" data-category="coding">Coding</button>
+            <button class="resource-filter" data-category="academics">Academics</button>
+            <button class="resource-filter" data-category="videos">Videos</button>
+
+        </section>
+
+        <section class="resource-grid" id="resourceGrid">
+
+            <div class="resource-card" data-category="coding">
+                <span>💻 CODING</span>
+                <h2>W3Schools</h2>
+                <p>Learn HTML, CSS, JavaScript and other programming languages.</p>
+                <a href="https://www.w3schools.com/" target="_blank" rel="noopener noreferrer">Explore Website →</a>
+            </div>
+
+            <div class="resource-card" data-category="coding">
+                <span>👩‍💻 CODING</span>
+                <h2>GeeksforGeeks</h2>
+                <p>Explore computer science concepts, coding tutorials and practice problems.</p>
+                <a href="https://www.geeksforgeeks.org/" target="_blank" rel="noopener noreferrer">Explore Website →</a>
+            </div>
+
+            <div class="resource-card" data-category="academics">
+                <span>📚 ACADEMICS</span>
+                <h2>Khan Academy</h2>
+                <p>Learn mathematics, science and other subjects through free lessons.</p>
+                <a href="https://www.khanacademy.org/" target="_blank" rel="noopener noreferrer">Explore Website →</a>
+            </div>
+
+            <div class="resource-card" data-category="coding">
+                <span>🌐 CODING</span>
+                <h2>MDN Web Docs</h2>
+                <p>Find detailed guides and documentation for web development.</p>
+                <a href="https://developer.mozilla.org/" target="_blank" rel="noopener noreferrer">Explore Website →</a>
+            </div>
+
+            <div class="resource-card" data-category="coding">
+                <span>🚀 CODING</span>
+                <h2>freeCodeCamp</h2>
+                <p>Practise programming and learn web development through projects.</p>
+                <a href="https://www.freecodecamp.org/" target="_blank" rel="noopener noreferrer">Explore Website →</a>
+            </div>
+
+            <div class="resource-card" data-category="videos">
+                <span>🎥 VIDEOS</span>
+                <h2>YouTube Learning</h2>
+                <p>Discover educational videos, tutorials and explanations.</p>
+                <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">Explore Website →</a>
+            </div>
+
+        </section>
+
+        <p id="noResults" class="no-results" hidden>
+            No resources found. Try another search!
+        </p>
+
+    </main>
+
+    <footer>
+        <p>StudySpace. Made with love for every student.</p>
+    </footer>
+
+    <script>
+
+        const searchInput = document.getElementById("searchInput");
+        const filterButtons = document.querySelectorAll(".resource-filter");
+        const resourceCards = document.querySelectorAll(".resource-card");
+        const noResults = document.getElementById("noResults");
+
+        let selectedCategory = "all";
+
+        function filterResources() {
+
+            const searchText = searchInput.value.toLowerCase();
+            let visibleCount = 0;
+
+            resourceCards.forEach(card => {
+
+                const matchesSearch =
+                    card.textContent.toLowerCase().includes(searchText);
+
+                const matchesCategory =
+                    selectedCategory === "all" ||
+                    card.dataset.category === selectedCategory;
+
+                if (matchesSearch && matchesCategory) {
+                    card.style.display = "block";
+                    visibleCount++;
+                } else {
+                    card.style.display = "none";
+                }
+
+            });
+
+            noResults.hidden = visibleCount !== 0;
+
+        }
+
+        searchInput.addEventListener("input", filterResources);
+
+        filterButtons.forEach(button => {
+
+            button.addEventListener("click", () => {
+
+                selectedCategory = button.dataset.category;
+
+                filterButtons.forEach(btn => {
+                    btn.classList.remove("active");
+                });
+
+                button.classList.add("active");
+
+                filterResources();
+
+            });
+
+        });
+
+    </script>
+
+</body>
+</html>

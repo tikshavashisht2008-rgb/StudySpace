@@ -1,0 +1,125 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Tasks | StudySpace</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="tasks-page">
+
+    <!-- Navigation Bar -->
+
+    <header>
+        <nav class="navbar">
+
+            <h2 class="logo">StudySpace.</h2>
+
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="tasks.html">My Tasks</a></li>
+                <li><a href="studyroom.html">Study Room</a></li>
+                <li><a href="resources.html">Resources</a></li>
+            </ul>
+
+        </nav>
+    </header>
+
+
+    <!-- Tasks Heading -->
+
+    <main class="tasks-page">
+
+        <section class="tasks-heading">
+
+            <p class="subtitle">PLAN. ORGANIZE. ACHIEVE.</p>
+
+            <h1>My Tasks</h1>
+
+            <p>Little steps lead to big achievements.</p>
+
+        </section>
+
+
+        <!-- Task Input Section -->
+
+        <section class="task-input-section">
+
+            <h2>Add a New Task</h2>
+
+            <div class="task-input">
+
+                <input
+                    type="text"
+                    id="taskInput"
+                    placeholder="What do you need to do?"
+                >
+                <select id="taskPriority">
+        <option value="High">High Priority</option>
+        <option value="Medium" selected>Medium Priority</option>
+        <option value="Low">Low Priority</option>
+        </select>
+        <input
+           type="date"
+           id="taskDeadline"
+        >
+
+                <button id="addTaskBtn">
+                    + Add Task
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- Task Statistics -->
+
+        <section class="task-stats">
+
+            <div class="stat-card">
+                <h3 id="totalTasks">0</h3>
+                <p>Total Tasks</p>
+            </div>
+
+            <div class="stat-card">
+                <h3 id="completedTasks">0</h3>
+                <p>Completed</p>
+            </div>
+
+            <div class="stat-card">
+                <h3 id="pendingTasks">0</h3>
+                <p>Pending</p>
+            </div>
+
+        </section>
+
+
+        <!-- Task List -->
+
+        <section class="task-list-section">
+
+            <h2>Your To-Do List</h2>
+
+            <ul id="taskList">
+                <!-- JavaScript will add tasks here -->
+            </ul>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        <p>Made with love. StudySpace © 2026</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+
+</body>
+</html>
